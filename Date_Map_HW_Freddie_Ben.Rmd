@@ -4,6 +4,7 @@ author: "Frederick & Ben"
 date: "2025-02-25"
 output: pdf_document
 ---
+Frederick's Work
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -52,5 +53,19 @@ date_diffs <- tibble(
 print(date_diffs)
 
 ```
+
+Ben's Work
+3)
+```{r}
+#create df
+num_lists <- list(c(4, 16, 25, 36, 49), c(2.3, 5.7, 8.1, 11.4), c(10, 20, 30, 40, 50))
+
+#compute mean, median, and mode
+map_dbl(num_lists, mean)
+map_dbl(num_lists, median)
+map_dbl(num_lists, sd)
+```
+
+
 
 
