@@ -66,6 +66,22 @@ map_dbl(num_lists, median)
 map_dbl(num_lists, sd)
 ```
 
+4)
+```{r}
+# create list of mixed date formats
+date_strings <- list("2023-06-10", "2022/12/25", "15-Aug-2021", "InvalidDate")
+
+#possibly avoids invalid errors
+date_strings_parced <- possibly(function(date_strings) {
+  date <- mdy(date_strings) %>% as.Date()#mdy
+  if (is.na(date)) date <- ymd(date_strings) %>% as.Date()#ymd
+  if (is.na(date)) date <- dmy(date_strings) %>% as.Date()#dmy
+  format(date, "%B")  
+}, NA)#returns na on failure
+
+#print names
+map(date_strings, date_strings_parced)
+```
 
 
 
