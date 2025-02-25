@@ -1,0 +1,56 @@
+---
+title: "Date_Map_HW_Freddie_Ben.rmd"
+author: "Frederick & Ben"
+date: "2025-02-25"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Load libraries 
+```{r}
+library(lubridate)
+library(tibble)  
+
+```
+# 1) Generate a sequence of dates from January 1, 2015 to December 31, 2025, spaced by every two months. Extract the year, quarter, and ISO week number for each date.
+```{r}
+date_seq <- seq(ymd("2015-01-01"), ymd("2025-12-31"), by = "2 months")
+
+# Extract year, quarter, and ISO week
+date_info <- tibble(
+  date = date_seq,
+  year = year(date_seq),
+  quarter = quarter(date_seq),
+  iso_week = isoweek(date_seq)
+)
+
+# Print the first few rows
+print(head(date_info))
+
+```
+# 2) Given the following dates, compute the difference in months and weeks between each consecutive pair.
+sample_dates <- c("2018-03-15", "2020-07-20", "2023-01-10", "2025-09-05")
+```{r}
+# Convert sample_dates to Date format
+sample_dates <- ymd(c("2018-03-15", "2020-07-20", "2023-01-10", "2025-09-05"))
+
+# Compute differences in months and weeks
+month_diffs <- diff(sample_dates) / dmonths(1)  # Convert to months
+week_diffs <- diff(sample_dates) / dweeks(1)    # Convert to weeks
+
+# Combine results into a tibble
+date_diffs <- tibble(
+  start_date = sample_dates[-length(sample_dates)],
+  end_date = sample_dates[-1],
+  months_diff = round(month_diffs, 2),
+  weeks_diff = round(week_diffs, 2)
+)
+
+# Print output
+print(date_diffs)
+
+```
+
+
